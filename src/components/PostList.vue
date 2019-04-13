@@ -6,12 +6,14 @@
           <span class="active">全部</span><span>精华</span><span>分享</span><span>问答</span><span>招聘</span><span>客户端测试</span>
         </li>
         <li v-for="item in items">
-          <img :src="item.author.avatar_url" class="avatar">
+          <router-link :to="{name: 'User_info',params:{name: item.author.loginname}}">
+            <img :src="item.author.avatar_url" class="avatar" :alt="item.author.loginname">
+          </router-link>
           <div class="countWrapper">
             <span class="count_of_replies">{{item.reply_count}}</span><span class="count_of_slash">/</span><span class="count_of_visit">{{item.visit_count}}</span>
           </div>
           <span :class="{'put-good':item.good, 'put-top':item.top, 'tab': (item.good!==true&&item.top!==true) }">{{item | tabFormatter}}</span>
-          <router-link :to="{name:'Article',params:{articleId: item.id}}">
+          <router-link :to="{name:'Article',params:{articleId: item.id,name: item.author.loginname}}">
             <span class="title">{{item.title}}</span>
           </router-link>
           <span class="last_time">{{item.last_reply_at | formatDate}}</span>
@@ -56,6 +58,8 @@
     width: 30px;
     height: 30px;
     vertical-align: middle;
+    font-size: 12px;
+    color: #666;
   }
   ul>li:first-child{
     background-color: #f6f6f6;

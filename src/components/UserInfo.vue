@@ -77,14 +77,9 @@
       },
       computed:{
         getRecentTopicsInFive(){
-          var arr = this.recent_topics
-          var newArr = []
-          for(let i=0;i<5;i++) {
-            if(arr[i]){
-              newArr.push(arr[i])
-            }
+          if(this.recent_topics){
+            return this.recent_topics.slice(0,5)
           }
-          return newArr
         }
       },
       beforeMount(){
