@@ -2,8 +2,8 @@
   <div id="main">
     <div class="postList">
       <ul>
-        <li>
-          <span class="active">全部</span><span>精华</span><span>分享</span><span>问答</span><span>招聘</span><span>客户端测试</span>
+        <li @click="topics_tab">
+          <span v-for="item in topicsLists" :class="{'active':item===zh_tab}">{{item}}</span>
         </li>
         <li v-for="item in items">
           <router-link :to="{name: 'User_info',params:{name: item.author.loginname}}">
@@ -19,26 +19,69 @@
           <span class="last_time">{{item.last_reply_at | formatDate}}</span>
         </li>
       </ul>
+      <Pagination @page="handlePage"></Pagination>
     </div>
   </div>
-
 </template>
 
 <script>
+  import Pagination from './Pagination'
     export default {
       name: "post-list",
+      components:{
+        Pagination
+      },
       data(){
           return {
-            items: []
+            items: [],
+            topicsLists: ['全部','精华','分享','问答','招聘'],
+            page: 1,
+            tab: 'all',
+            zh_tab: '全部'
           }
       },
       methods:{
-        getData(){
-            this.$http.get('https://cnodejs.org/api/v1/topics').then((res)=>{
+        getData(page,tab){
+            this.$http.get('https://cnodejs.org/api/v1/topics',{params:{page,limit:20,tab}}).then((res)=>{
               this.items = res.data.data
             }).catch((err)=>{
               console.log(err)
             })
+        },
+        handlePage(page){
+          this.page = page
+          this.getData(this.page,this.tab)
+        },
+        topics_tab(e){
+          switch (e.target.innerText){
+            case '全部':
+              this.tab = 'all'
+              this.zh_tab = '全部'
+              this.getData(this.page,this.tab)
+              break
+            case '精华':
+              this.tab = 'good'
+              this.zh_tab = '精华'
+              this.getData(this.page,this.tab)
+              break
+            case '分享':
+              this.tab = 'share'
+              this.zh_tab = '分享'
+              this.getData(this.page,this.tab)
+              break
+            case '问答':
+              this.tab = 'ask'
+              this.zh_tab = '问答'
+              this.getData(this.page,this.tab)
+              break
+            case '招聘':
+              this.tab = 'job'
+              this.zh_tab = '招聘'
+              this.getData(this.page,this.tab)
+              break
+            default:
+              return;
+          }
         }
       },
       beforeMount(){
@@ -68,6 +111,7 @@
     margin: 0 10px;
     color: #80bd01;
     font-size: 14px;
+    cursor: pointer;
   }
   ul li:first-child .active{
     background-color: #80bd01;

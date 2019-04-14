@@ -8,10 +8,10 @@
         </div>
         <div class="nav-right">
           <ul class="clearfix">
-            <li><a href="">首页</a></li>
-            <li><a href="">新手入门</a></li>
-            <li><a href="">API</a></li>
-            <li><a href="">关于</a></li>
+            <li><a href="/">首页</a></li>
+            <li><a href="https://cnodejs.org/getstart" target="_blank">新手入门</a></li>
+            <li><a href="https://cnodejs.org/api" target="_blank">API</a></li>
+            <li><a href="https://cnodejs.org/about" target="_blank">关于</a></li>
             <li><a href="">注册</a></li>
             <li><a href="">登录</a></li>
           </ul>

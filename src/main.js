@@ -42,6 +42,8 @@ Vue.filter('tabFormatter',function(item){
     return '分享'
   }else if(item.tab === 'ask'){
     return '问答'
+  }else if(item.tab === 'job'){
+    return '招聘'
   }else{
     return '帖子'
   }
