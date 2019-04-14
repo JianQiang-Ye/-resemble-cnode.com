@@ -9,7 +9,6 @@ import Slidebar from '../components/Slidebar'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       name: 'PostList',
