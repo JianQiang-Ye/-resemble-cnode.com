@@ -8,7 +8,9 @@
         </div>
         <div class="nav-right">
           <ul class="clearfix">
-            <li><a href="/">首页</a></li>
+            <li><router-link :to="{name: 'PostList'}">
+              <a href="javascript:;">首页</a></router-link>
+            </li>
             <li><a href="https://cnodejs.org/getstart" target="_blank">新手入门</a></li>
             <li><a href="https://cnodejs.org/api" target="_blank">API</a></li>
             <li><a href="https://cnodejs.org/about" target="_blank">关于</a></li>
